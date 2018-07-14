@@ -4,17 +4,10 @@ import axios, {get} from 'axios'
 class App extends Component {
 
   goToApi(){
-    const url = "https://localhost:8000"
+    const url = "http://localhost:8000"
     const proxyUrl = "https://cors-anywhere.herokuapp.com/"
-    get(proxyUrl + url,
-    {
-    //  withCredentials: true,
-    mode:"no-cors",
-      headers:{
-        "Content-Type": "text/plane",
-        "Accept": "application/json"
-      }
-    })
+   fetch(url, {
+     headers:{'Access-Control-Allow-Origin':'*'}}).catch(console.log)
   }
 
   render() {
