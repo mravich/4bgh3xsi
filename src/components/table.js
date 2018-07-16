@@ -1,6 +1,7 @@
 import React from 'react';
 import { DATABASE_COLLECTIONS } from '../constants';
 import DateTime from 'react-datetime';
+
 export default () => {
   function getTableField(item) {
     switch (item.type) {
