@@ -1,9 +1,58 @@
-import React from 'react';
-import { DATABASE_COLLECTIONS } from '../constants';
+import React, { Component } from 'react';
+import { post } from 'axios';
 import DateTime from 'react-datetime';
+import {
+  ADD_ITEM_URL,
+  REQUEST_OPTIONS,
+  DATABASE_COLLECTIONS,
+} from '../constants';
 
-export default () => {
-  function getTableField(item) {
+export default class extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      errMessage: '',
+    };
+
+    this.handleActionButtonClick = this.handleActionButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+    DATABASE_COLLECTIONS[this.props.property].tableOptions.map((item, key) => {
+      if (item.value !== 'Action') {
+        return this.setState({
+          [item.code]: '',
+          itemValue: this.props.property
+        });
+      }
+    });
+  }
+
+  handleChange(e) {
+    console.log("NAME: ", e.target.name)
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleActionButtonClick() {
+    Object.entries(this.state).map((item, key) => {
+      console.log('Item:', Object.keys(item));
+      if (!item) {
+        return this.setState({
+          errMessage: 'Please provide all required fields.',
+        });
+      }
+    });
+
+    const requestBody = this.state;
+    return post(ADD_ITEM_URL, requestBody, REQUEST_OPTIONS)
+      .then(res => console.log('Response: ', res))
+      .catch(error => console.log('Error occured: ', error));
+  }
+
+  getTableField(item) {
     switch (item.type) {
       case 'input':
         return (
@@ -11,6 +60,8 @@ export default () => {
             type="text"
             className={item.className}
             placeholder={item.placeholder}
+            name={item.code}
+            onChange={this.handleChange.bind(this)}
           />
         );
       case 'button':
@@ -18,7 +69,7 @@ export default () => {
           <button
             className={item.className}
             onClick={() => {
-              console.log(item.actionText);
+              this.handleActionButtonClick();
             }}
           >
             {item.actionText}
@@ -28,7 +79,7 @@ export default () => {
         return <DateTime inputProps={{ placeholder: 'N/A', disabled: true }} />;
     }
   }
-  function getTableHeader(property) {
+  getTableHeader(property) {
     return (
       <thead>
         <tr>
@@ -39,34 +90,35 @@ export default () => {
       </thead>
     );
   }
-  function getTableBody(property) {
+  getTableBody(property) {
     return (
       <tbody>
         <tr>
           {DATABASE_COLLECTIONS[property].tableOptions.map((item, key) => {
-            return <td key={key}>{getTableField(item)}</td>;
+            return <td key={key}>{this.getTableField(item)}</td>;
           })}
         </tr>
       </tbody>
     );
   }
 
-  function getTable(property, key) {
+  getTable(property) {
     return (
-      <div style={{ borderStyle: 'solid', marginBottom: '10px' }} key={key}>
+      <div style={{ borderStyle: 'solid', marginBottom: '10px' }}>
         <h2>Add new {property} table</h2>
         <table className="table">
-          {getTableHeader(property)}
-          {getTableBody(property)}
+          {this.getTableHeader(property)}
+          {this.getTableBody(property)}
         </table>
       </div>
     );
   }
-  return (
-    <div>
-      {Object.entries(DATABASE_COLLECTIONS).map((item, key) => {
-        return getTable(item[0], key);
-      })}
-    </div>
-  );
-};
+  render() {
+    return (
+      <div>
+        <b style={{ color: 'red' }}>{this.state.errMessage}</b>
+        {this.getTable(this.props.property)}
+      </div>
+    );
+  }
+}
