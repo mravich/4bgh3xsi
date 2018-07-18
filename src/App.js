@@ -44,7 +44,18 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Sidebar properties={['database', 'users']} />
+        <Sidebar
+          menuItems={[
+            {
+              name: 'DATABASE',
+              menuItems: ['Facility', 'Activity', 'Reservation', 'User'],
+            },
+            {
+              name: 'OTHER',
+              menuItems: ['Other1', 'Other2'],
+            },
+          ]}
+        />
       </div>
     );
   }

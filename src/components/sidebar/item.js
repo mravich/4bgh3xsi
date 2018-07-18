@@ -1,46 +1,47 @@
-import React from 'react'
+import React from 'react';
+import { DATABASE_ACTIONS } from '../../constants/database';
 
-
-export default ({id})=>{
-    return (
-        <div className="panel panel-default">
-            <div className="panel-heading">
-                <h4 className="panel-title">
-                    <a
-                        data-toggle="collapse"
-                        data-parent="#accordion"
-                        href={'#'+id}
-                    >
-                        <span className="glyphicon glyphicon-folder-close" />{id.toUpperCase()}
-                    </a>
-                </h4>
-            </div>
-            <div id={id} className="panel-collapse collapse in">
-                <div className="panel-body col-sm-12 col-md-12">
-                    <table className="table">
-                        <tr>
-                            <td>
-                                <a href="http://www.jquery2dotnet.com">ADD</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="http://www.jquery2dotnet.com">EDIT</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="http://www.jquery2dotnet.com">DELETE</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="http://www.jquery2dotnet.com">LIST</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+export default ({ name }) => {
+  function renderMenuEndItems() {
+    return DATABASE_ACTIONS.map((item, key) => {
+      return (
+        <tr key={key}>
+          <td>
+            {' '}
+            <button
+              className="btn btn-link"
+              onClick={() => {
+                console.log(
+                  'Show ',
+                  item.toLowerCase() + 'ing ',
+                  'table for: ',
+                  name,
+                );
+              }}
+            >
+              {item}
+            </button>
+          </td>
+        </tr>
+      );
+    });
+  }
+  return (
+    <div className="panel panel-default">
+      <div className="panel-heading">
+        <h6 className="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href={'#' + name}>
+            {name.toUpperCase()}
+          </a>
+        </h6>
+      </div>
+      <div id={name} className="panel-collapse collapse in">
+        <div className="panel-body col-sm-12 col-md-12">
+          <table className="table">
+            <tbody>{renderMenuEndItems()}</tbody>
+          </table>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};

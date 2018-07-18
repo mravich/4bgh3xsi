@@ -141,3 +141,11 @@ export const DATABASE_COLLECTIONS = {
     ],
   },
 };
+
+
+export const DATABASE_ACTIONS = [
+    'ADD',
+    'EDIT',
+    'DELETE',
+    'LIST'
+]
