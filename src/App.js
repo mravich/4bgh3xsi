@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { get, post } from 'axios';
 import Table from './components/table';
-import { DATABASE_COLLECTIONS } from './constants';
+import { DATABASE_COLLECTIONS, SIDEBAR_MENU_ITEMS } from './constants';
 import Sidebar from './components/sidebar/sidebar';
 import Header from './components/header';
 class App extends Component {
@@ -44,18 +44,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Sidebar
-          menuItems={[
-            {
-              name: 'DATABASE',
-              menuItems: ['Facility', 'Activity', 'Reservation', 'User'],
-            },
-            {
-              name: 'OTHER',
-              menuItems: ['Other1', 'Other2'],
-            },
-          ]}
-        />
+        <Sidebar menuItems={SIDEBAR_MENU_ITEMS} />
       </div>
     );
   }

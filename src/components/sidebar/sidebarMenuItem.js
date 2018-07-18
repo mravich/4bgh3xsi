@@ -16,12 +16,7 @@ export default ({ menuItem }) => {
     <div className="panel panel-default">
       <div className="panel-heading">
         <h4 className="panel-title">
-          <a
-            data-toggle="collapse"
-            data-parent="#accordion"
-            href={'#' + menuItem.name}
-          >
-            <span className="glyphicon glyphicon-folder-close" />
+          <a data-toggle="collapse" href={'#' + menuItem.name} data-parent="#accordion">
             {menuItem.name.toUpperCase()}
           </a>
         </h4>
