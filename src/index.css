@@ -3,3 +3,9 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.sideBar {
+  border: solid;
+  width: 10vw;
+  float: left;
+}
