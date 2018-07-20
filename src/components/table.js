@@ -19,6 +19,7 @@ export default class extends Component {
   }
 
   componentDidMount() {
+    console.log('property:',this.props.property)
     DATABASE_COLLECTIONS[this.props.property].tableOptions.map((item, key) => {
       if (item.value !== 'Action') {
         return this.setState({

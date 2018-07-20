@@ -1,18 +1,16 @@
 import React from 'react';
 import { DATABASE_ACTIONS } from '../../constants/database';
 
-export default ({ name }) => {
-  function handleClick(item) {
-    console.log('Show ', item.toLowerCase() + 'ing ', 'table for: ', name);
-  }
+export default ({ name,handleSubmit}) => {
+
+
   function renderMenuEndItems() {
-    return DATABASE_ACTIONS.map((item, key) => {
+    return DATABASE_ACTIONS.map((action, key) => {
       return (
         <tr key={key}>
           <td>
-            {' '}
-            <button className="btn btn-link" onClick={() => handleClick(item)}>
-              {item}
+            <button className="btn btn-link" onClick={() => handleSubmit(action,name)}>
+              {action}
             </button>
           </td>
         </tr>

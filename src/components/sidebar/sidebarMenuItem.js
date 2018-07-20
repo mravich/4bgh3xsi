@@ -1,12 +1,12 @@
 import React from 'react';
 import Item from './item';
-export default ({ menuItem }) => {
+export default ({ menuItem,handleSubmit }) => {
   function renderMenuItems() {
     return menuItem.menuItems.map((item, key) => {
       return (
         <tr key={key}>
           <td>
-            <Item name={item} />
+            <Item name={item} handleSubmit={handleSubmit} />
           </td>
         </tr>
       );

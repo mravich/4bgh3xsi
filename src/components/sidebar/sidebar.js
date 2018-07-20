@@ -1,10 +1,10 @@
 import React from 'react';
 import SideBarMenuItem from './sidebarMenuItem';
 import {SIDEBAR_MENU_ITEMS} from '../../constants/index'
-export default () => {
+export default ({handleSubmit}) => {
   function renderSidebarMenuItems() {
     return SIDEBAR_MENU_ITEMS.map((item, key) => {
-      return <SideBarMenuItem menuItem={item} key={key} name={item} />;
+      return <SideBarMenuItem menuItem={item} key={key} name={item} handleSubmit={handleSubmit}/>;
     });
   }
 
