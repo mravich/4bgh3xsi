@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { get, post } from 'axios';
-import Table from './components/table';
-import { DATABASE_COLLECTIONS, SIDEBAR_MENU_ITEMS } from './constants';
 import Sidebar from './components/sidebar/sidebar';
 import Header from './components/header';
+import Content from './components/content/content';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -32,19 +31,12 @@ class App extends Component {
     alert('Activity je poslan: ' + this.state.value);
   }
 
-  /*OVO TU TI JE IZLIST SVIH TABLICA -> SVAKA MORA DOBIT property="Ime koleckije" da bi znala koje fieldove treba imati -> to je u database.js
-
-{Object.entries(DATABASE_COLLECTIONS).map((item, key) => {
-              console.log("ITEM: ", item)
-              return <Table property={item[0]} key={key} />;
-          })}
-
-   */
   render() {
     return (
       <div>
         <Header />
-        <Sidebar menuItems={SIDEBAR_MENU_ITEMS} />
+        <Sidebar />
+        <Content />
       </div>
     );
   }

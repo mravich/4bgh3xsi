@@ -1,8 +1,9 @@
 import React from 'react';
 import SideBarMenuItem from './sidebarMenuItem';
-export default ({ menuItems }) => {
+import {SIDEBAR_MENU_ITEMS} from '../../constants/index'
+export default () => {
   function renderSidebarMenuItems() {
-    return menuItems.map((item, key) => {
+    return SIDEBAR_MENU_ITEMS.map((item, key) => {
       return <SideBarMenuItem menuItem={item} key={key} name={item} />;
     });
   }

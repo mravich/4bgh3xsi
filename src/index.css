@@ -9,3 +9,9 @@ body {
   width: 10vw;
   float: left;
 }
+
+
+.content{
+  width:90vw;
+  border:solid;
+}
